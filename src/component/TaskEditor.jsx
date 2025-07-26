@@ -12,8 +12,7 @@ const TaskEditor = () => {
   const [editId, seteditId] = useState(null);
   const [status, setstatus] = useState("pending");
   const [filterStatus, setFilterStatus] = useState("all");
-
-  //   add = useTaskStore((state) => state.add);
+  // const [checked, setChecked] = useState(false);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -51,36 +50,75 @@ const TaskEditor = () => {
     filterStatus === "all" ? true : task.status === filterStatus
   );
 
+  const handleCheckbox = (task) => {
+    const newStatus = task.status === "pending" ? "completed" : "pending";
+    edit(task.id, task.title, newStatus);
+  };
+
   return (
     <>
-      <form action="" onSubmit={handleFormSubmit}>
-        <input
-          value={inputvalue}
-          onChange={handleInput}
-          type="text"
-          placeholder="Enter Task"
-        />
-      </form>
+      <div className="container">
+        <div className="main-container">
+          <div className="task-container">
+            <form action="" onSubmit={handleFormSubmit}>
+              <input
+                className="input"
+                value={inputvalue}
+                onChange={handleInput}
+                type="text"
+                placeholder="Enter Task"
+              />
+            </form>
 
-      <ul>
-        {filteredData.map((task) => (
-          <React.Fragment key={task.id}>
-            <div>
-              <li>{task.title}</li>
-              <p>{task.status}</p>
+            <ul>
+              {filteredData.map((task) => (
+                <React.Fragment key={task.id}>
+                  <div className="task-data-cont">
+                    <div className="data">
+                      <input
+                        type="checkbox"
+                        checked={task.status === "completed"}
+                        onChange={() => handleCheckbox(task)}
+                      />
 
-              <button onClick={() => handleEdit(task)}>EDIT</button>
-              <button onClick={() => handleDlt(task)}>DELETE</button>
-            </div>
-          </React.Fragment>
-        ))}
-      </ul>
-      <select onChange={(e) => setFilterStatus(e.target.value)} name="" id="">
-        <option value="all">All</option>
+                      <h3>{task.title}</h3>
+                      <p>{task.status}</p>
+                    </div>
+                    <div className="btn-cont">
+                      <button
+                        className="button"
+                        onClick={() => handleEdit(task)}
+                      >
+                        EDIT
+                      </button>
+                      <button
+                        className="button"
+                        onClick={() => handleDlt(task)}
+                      >
+                        DELETE
+                      </button>
+                    </div>
+                  </div>
+                </React.Fragment>
+              ))}
+            </ul>
+          </div>
+          {/* // --------------- */}
+          <div className="selector-container">
+            <select
+              className="selector"
+              onChange={(e) => setFilterStatus(e.target.value)}
+              name=""
+              id=""
+            >
+              <option value="all">All</option>
 
-        <option value="pending">Pending</option>
-        <option value="completed">Completed</option>
-      </select>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

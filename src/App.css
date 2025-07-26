@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,82 @@
 
 .read-the-docs {
   color: #888;
+} */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* color: white; */
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.main-container {
+  /* background-color: #888; */
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  width: 50vw;
+}
+
+.input {
+  width: 100%;
+
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid chocolate;
+}
+
+.task-container {
+  /* background-color: burlywood; */
+  width: 60%;
+}
+
+.task-data-cont {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid rgb(231, 59, 28);
+  border-radius: 8px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.data {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.button {
+  background-color: chocolate;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid gray;
+}
+.button:hover {
+  box-shadow: 2px 5px 5px rgb(150, 93, 53);
+  transform: translateY(-1px);
+}
+
+.btn-cont {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+}
+
+.selector {
+  background-color: chocolate;
+  color: white;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 8px;
 }
