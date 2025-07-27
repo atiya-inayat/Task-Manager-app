@@ -8,7 +8,7 @@ const useTaskStore = create((set) => ({
       tasks: [
         ...state.tasks,
         {
-          id: Date.now(),
+          id: Date.now() + Math.random(),
           title,
           status,
         },

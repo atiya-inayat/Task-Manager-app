@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useTaskStore from "../store";
 
 const TaskEditor = () => {
@@ -30,6 +30,17 @@ const TaskEditor = () => {
     }
   };
 
+  useEffect(() => {
+    const savedTask = JSON.parse(localStorage.getItem("tasks"));
+    if (savedTask) {
+      savedTask.forEach((task) => add(task.title, task.status));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   const handleInput = (e) => {
     const newInputValue = e.target.value;
     setInputvalue(newInputValue);
@@ -52,12 +63,15 @@ const TaskEditor = () => {
 
   const handleCheckbox = (task) => {
     const newStatus = task.status === "pending" ? "completed" : "pending";
+
     edit(task.id, task.title, newStatus);
   };
 
   return (
     <>
       <div className="container">
+        <h1>Your Task Manager</h1>
+
         <div className="main-container">
           <div className="task-container">
             <form action="" onSubmit={handleFormSubmit}>
@@ -77,25 +91,38 @@ const TaskEditor = () => {
                     <div className="data">
                       <input
                         type="checkbox"
+                        className="checkbox"
                         checked={task.status === "completed"}
                         onChange={() => handleCheckbox(task)}
                       />
 
-                      <h3>{task.title}</h3>
-                      <p>{task.status}</p>
+                      <h3
+                        className={
+                          task.status === "completed" ? "completed" : ""
+                        }
+                      >
+                        {task.title}
+                      </h3>
+                      <p
+                      // className={
+                      //   task.status === "completed" ? "completed" : ""
+                      // }
+                      >
+                        {task.status}
+                      </p>
                     </div>
                     <div className="btn-cont">
                       <button
                         className="button"
                         onClick={() => handleEdit(task)}
                       >
-                        EDIT
+                        Edit
                       </button>
                       <button
-                        className="button"
+                        className="button dlt-btn"
                         onClick={() => handleDlt(task)}
                       >
-                        DELETE
+                        Delete
                       </button>
                     </div>
                   </div>
